@@ -1,0 +1,4 @@
+/vendor/
+/tests/google_application_credentials.json
+.DS_Store
+/.vscode/
