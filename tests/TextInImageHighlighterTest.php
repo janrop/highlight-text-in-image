@@ -17,7 +17,7 @@ final class TextInImageHighlighterTest extends TestCase {
 
         $image = fopen(__DIR__ . '/Lorem_Ipsum_Helvetica.png', 'r');
 
-        $this->highlighter = new \Janrop\TextInImageHighlighter($image, []);
+        $this->highlighter = new \Janrop\TextInImageHighlighter($image);
 
     }
 
