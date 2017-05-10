@@ -27,6 +27,11 @@ class TextInImageHighlighter {
      */
     function __construct($imageStream, $VisionClientConfig = array()){
 
+        if(gettype($imageStream) !== 'resource'){
+            throw new \InvalidArgumentException('constructor expects first parameter to be an image stream. Got: ' . gettype($imageStream));
+            return false;
+        }
+
         $imageData = stream_get_contents($imageStream);
         $this->image = imagecreatefromstring($imageData);
 
@@ -44,6 +49,8 @@ class TextInImageHighlighter {
         }
 
         $this->annotations = $annotations;
+
+        return true;
 
     }
 
@@ -127,7 +134,7 @@ class TextInImageHighlighter {
     public function getImage(){
 
         return $this->image;
-        
+
     }
 }
 

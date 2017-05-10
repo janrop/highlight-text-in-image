@@ -21,6 +21,14 @@ final class TextInImageHighlighterTest extends TestCase {
 
     }
 
+    public function testRequiresImageStreamAsParameter(){
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        new \Janrop\TextInImageHighlighter(null);
+
+    }
+
     public function testManipulatesImage(){
         
         $imageBefore = $this->_clone_img_resource($this->highlighter->getImage());
