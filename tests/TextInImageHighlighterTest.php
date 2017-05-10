@@ -25,7 +25,7 @@ final class TextInImageHighlighterTest extends TestCase {
         
         $imageBefore = $this->_clone_img_resource($this->highlighter->getImage());
 
-        $this->highlighter->findAndHighlight('ipsum', true, [255, 0, 0], 3);
+        $this->highlighter->find('ipsum', true)->highlight([255, 0, 0], 3);
 
         $this->assertNotEquals($imageBefore, $this->highlighter->getImage());
 
@@ -33,7 +33,7 @@ final class TextInImageHighlighterTest extends TestCase {
 
     public function testFindOccurences(){
 
-        $this->assertGreaterThan(1, $this->highlighter->findAndHighlight('Lorem', true, [255, 0, 0], 3));
+        $this->assertGreaterThan(1, $this->highlighter->find('Lorem', true)->countMatches());
 
     }
 

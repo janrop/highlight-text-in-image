@@ -27,14 +27,16 @@ $image = fopen(__DIR__ . '/Lorem_Ipsum_Helvetica.png', 'r');
 
 $highlighter = new \Janrop\TextInImageHighlighter($image);
 
-# Check if string exists in image:
-if($highlighter->findAndHighlight('Test')){
-    # String "Test" in image
+# Check if String "Foo" exists in document.
+# If it does  highlight it with a green border.
+# If not highlight all Blocks containing "Bar" with a red border.
+if($highlighter->find('Foo')->countMatches()){
+    $highlighter->highlight([0, 255, 0], 3);
+}else{
+    $hightlighter->find('Bar', false)
+                 ->highlight([255, 0, 0], 3);
 }
 
-# Draw red rectange with a 3 px width border around every text block equaling to or containing the test string
-$highlighter->findAndHighlight('Test', false, [255, 0, 0], 3);
-
 # Save image to jpeg
-imagejpeg($highlighter->getImage(), "annotated2.jpg");
+imagejpeg($highlighter->getImage(), "annotated.jpg");
 ```

@@ -15,6 +15,7 @@ class TextInImageHighlighter {
 
     private $image;
     private $annotations;
+    private $matches;
 
     /**
      * Create new TextInImageHighlighter requires an Image resource 
@@ -52,12 +53,10 @@ class TextInImageHighlighter {
      * 
      * @param String $search 
      * @param boolean $strict
-     * @param array $color - RGB
-     * @param int $lineThickness
      * 
-     * @return int number of highlighted blocks
+     * @return $this
      */
-    public function findAndHighlight($search = '', $strict = true, $color = array(0, 0, 255), $lineThickness = 5){
+    public function find($search = '', $strict = true){
 
         $matchingBlocks = array_filter($this->annotations, function($annotation) use ($search, $strict){
 
@@ -69,7 +68,32 @@ class TextInImageHighlighter {
             
         });
 
-        $matchingBlocks = array_values($matchingBlocks);
+        $this->matches = array_values($matchingBlocks);
+
+        return $this;
+
+    }
+
+    /**
+     * Get Number of matches from last find()
+     *
+     * @return int
+     */
+    public function countMatches(){
+
+        return count($this->matches);
+
+    }
+
+    /**
+     * Hightlight the matches found by find()
+     * 
+     * @param array $color - [R,G,B]
+     * @param int $lineThickness
+     * 
+     * @return number of highlighted matches
+     */
+    public function highlight($color = array(0, 0, 255), $lineThickness = 5){
 
         // Set a colour for the sides of the rectangle
         $color = call_user_func_array('imagecolorallocate', array_merge(array($this->image), $color));
@@ -77,7 +101,7 @@ class TextInImageHighlighter {
         // Set width of the rectangle
         imagesetthickness($this->image, $lineThickness);
 
-        foreach($matchingBlocks as $annotationToHightlight){
+        foreach($this->matches as $annotationToHightlight){
 
             // Draw the rectangle from the top-left to the bottom-right.
             imagerectangle(
@@ -91,7 +115,8 @@ class TextInImageHighlighter {
 
         }
 
-        return count($matchingBlocks);
+        return count($this->matches);
+
     }
 
     /**
@@ -100,7 +125,9 @@ class TextInImageHighlighter {
      * @return resource Image
      */
     public function getImage(){
+
         return $this->image;
+        
     }
 }
 

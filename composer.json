@@ -19,5 +19,8 @@
         "psr-4": {
             "Janrop\\": "src"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
