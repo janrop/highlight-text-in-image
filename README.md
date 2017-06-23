@@ -6,7 +6,7 @@
 ## Installation
 
 ```
-$ composer require janrop/highlight-test-in-image
+$ composer require janrop/highlight-text-in-image
 ```
 
 Before using you need to download a [Google Authentication Details .json file](https://developers.google.com/identity/protocols/application-default-credentials#howtheywork) and reference it in the `GOOGLE_APPLICATION_CREDENTIALS` environment variable:
