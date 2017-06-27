@@ -33,7 +33,7 @@ $highlighter = new \Janrop\TextInImageHighlighter($image);
 if($highlighter->find('Foo')->countMatches()){
     $highlighter->highlight([0, 255, 0], 3);
 }else{
-    $hightlighter->find('Bar', false)
+    $highlighter->find('Bar', false)
                  ->highlight([255, 0, 0], 3);
 }
 
